@@ -22,6 +22,7 @@ class Booking extends Migration
             $table->integer('jumlah_cicilan');
             $table->integer('id_admin');
             $table->integer('status');
+            $table->string('bukti');
             $table->timestamps();
         });
     }

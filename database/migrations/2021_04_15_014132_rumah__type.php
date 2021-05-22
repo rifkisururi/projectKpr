@@ -23,6 +23,10 @@ class RumahType extends Migration
             $table->string('gambar1');
             $table->string('gambar2');
             $table->string('gambar3');
+            $table->integer('cicilan5');
+            $table->integer('cicilan10');
+            $table->integer('cicilan15');
+            $table->integer('cicilan20');
             $table->timestamps();
         });
     }

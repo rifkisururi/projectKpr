@@ -56,7 +56,6 @@ class userController extends Controller
      */
     public function store(Request $request)
     {
-        //
     }
 
     /**
@@ -83,6 +82,7 @@ class userController extends Controller
         $roles = Role::pluck('name', 'name')->all();
         $userRole = $user->roles->pluck('name', 'name')->all();
 
+
         return view('user.editUser', compact('user', 'roles', 'userRole'));
     }
 
@@ -97,9 +97,9 @@ class userController extends Controller
     {
 
         $user = User::find($id);
-        $roles = Role::pluck('name', 'name')->all();
-        $userRole = $user->roles->pluck('name', 'name')->all();
-        return view('admin.editUser', compact('user', 'roles', 'userRole'));
+        DB::table('model_has_roles')->where('model_id', $id)->delete();
+        $user->assignRole($request->input('role'));
+        return redirect('/user');
     }
 
     /**

@@ -58,20 +58,20 @@
                 <div id="collapsePages1" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('user_index') }}"> Data Pengguna</a>
-                        <a class="collapse-item fas fa-arrow-circle-right" href=""> Data Perumahan</a>
+                        <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('rumahAdminIndex') }}"> Data Perumahan</a>
+                        <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('rumahAdminTypeIndex') }}"> Data Tipe Rumah</a>
                     </div>
                 </div>
             </li>
 
-
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('home') }}">
+                <a class="nav-link" href="{{ route('rumah') }}">
                     <i class="fas fa-fw fa-home"></i>
                     <span>List Rumah</span></a>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('home') }}">
+                <a class="nav-link" href="{{ route('riwayat') }}">
                     <i class="fas fa-fw fa-home"></i>
                     <span>Riwayat Pemesanan</span></a>
             </li>

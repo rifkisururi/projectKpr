@@ -4,23 +4,27 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\rumah_detail_model;
 
 class rumah_controller extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        $user = DB::table('rumah_detail')
+        $rumah = DB::table('rumah_detail')
             ->join('rumah_type', 'rumah_detail.id_rumah_type', '=', 'rumah_type.id')
-            ->join('booking', 'booking.id_rumah_detail', '=', 'rumah_detail.id')
-            ->select('users.*', 'model_has_roles.role_id', 'roles.name as hakAkses')
+            ->leftJoin('booking', 'booking.id_rumah_detail', '=', 'rumah_detail.id')
+            ->select('rumah_detail.alamat', 'rumah_detail.id', 'rumah_type.label', 'booking.status')
             ->get();
 
-        return view('user.index', ['user' => $user]);
+        $rumahType = DB::table('rumah_type')->get();
+        return view('admin.rumah.index', ['rumah' => $rumah, 'rumahType' => $rumahType]);
+    }
+
+    public function typerumah()
+    {
+        $rumahType = DB::table('rumah_type')->get();
+        return view('admin.typerumah.index', ['rumahType' => $rumahType]);
     }
 
     /**
@@ -41,7 +45,11 @@ class rumah_controller extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $add = new rumah_detail_model;
+        $add->id_rumah_type = $request->id_rumah_type;
+        $add->alamat = $request->alamat;
+        $add->save();
+        return redirect('/rumahAdmin');
     }
 
     /**
@@ -63,7 +71,16 @@ class rumah_controller extends Controller
      */
     public function edit($id)
     {
-        //
+        $rumah =
+            DB::table('rumah_detail')
+            ->join('rumah_type', 'rumah_detail.id_rumah_type', '=', 'rumah_type.id')
+            ->where('rumah_detail.id', '=', $id)
+            ->select('rumah_detail.alamat', 'rumah_detail.id', 'rumah_type.label', 'rumah_detail.id_rumah_type')
+            ->first();
+
+        $rumahType = DB::table('rumah_type')->get();
+
+        return view('admin.rumah.edit', ['rumah' => $rumah, 'rumahType' => $rumahType]);
     }
 
     /**
@@ -75,7 +92,12 @@ class rumah_controller extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = rumah_detail_model::findOrFail($id);
+        //$update_barang->kd_brg = $request->get('addkdbrg');
+        $data->id_rumah_type = $request->get('type');
+        $data->alamat = $request->get('alamat');
+        $data->save();
+        return redirect('/rumahAdmin');
     }
 
     /**
@@ -86,6 +108,29 @@ class rumah_controller extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('rumah_detail')
+            ->where('rumah_detail.id', '=', $id)
+            ->delete();
+
+        return redirect('/rumahAdmin');
+    }
+
+    public function userrumahtype()
+    {
+        $rumahType = DB::table('rumah_type')->get();
+        return view('rumah.type', ['rumahType' => $rumahType]);
+    }
+
+
+    public function listrumah($id)
+    {
+        $rumah = DB::table('rumah_detail')
+            ->join('rumah_type', 'rumah_detail.id_rumah_type', '=', 'rumah_type.id')
+            ->leftJoin('booking', 'booking.id_rumah_detail', '=', 'rumah_detail.id')
+            ->where('rumah_detail.id_rumah_type', '=', $id)
+            ->select('rumah_detail.alamat', 'rumah_detail.id', 'booking.status')
+            ->get();
+
+        return view('rumah.listrumah', ['rumah' => $rumah]);
     }
 }

@@ -5,9 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class rumah_type extends Model
+class bookingModel extends Model
 {
     use HasFactory;
-
-    public $table = "rumah_type";
+    public $table = "booking";
 }

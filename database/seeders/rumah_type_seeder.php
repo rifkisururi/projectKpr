@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\rumah_type;
+use App\Models\rumah_type_model;
 
 class rumah_type_seeder extends Seeder
 {
@@ -14,7 +14,7 @@ class rumah_type_seeder extends Seeder
      */
     public function run()
     {
-        rumah_type::create([
+        rumah_type_model::create([
             'label' => 'Angrek',
             'typerumah' => '36/90',
             'luas' => 90,
@@ -22,10 +22,14 @@ class rumah_type_seeder extends Seeder
             'gambar2' => '',
             'gambar3' => '',
             'keterangan' => '',
-            'spesifikasi' => ''
+            'spesifikasi' => '',
+            'cicilan5' => 5,
+            'cicilan10' => 10,
+            'cicilan15' => 15,
+            'cicilan20' => 20,
         ]);
 
-        rumah_type::create([
+        rumah_type_model::create([
             'label' => 'Kenanga',
             'typerumah' => '36/90',
             'luas' => 90,
@@ -33,7 +37,11 @@ class rumah_type_seeder extends Seeder
             'gambar2' => '',
             'gambar3' => '',
             'keterangan' => '',
-            'spesifikasi' => ''
+            'spesifikasi' => '',
+            'cicilan5' => 5,
+            'cicilan10' => 10,
+            'cicilan15' => 15,
+            'cicilan20' => 20,
         ]);
     }
 }

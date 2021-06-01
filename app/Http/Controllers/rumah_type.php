@@ -49,6 +49,7 @@ class rumah_type extends Controller
         $data->cicilan10 = $request->get('cicilan10');
         $data->cicilan15 = $request->get('cicilan15');
         $data->cicilan20 = $request->get('cicilan20');
+        $data->harga_dp = $request->get('harga_dp');
         $data->save();
     }
 
@@ -73,7 +74,7 @@ class rumah_type extends Controller
         $rumah_type =
             DB::table('rumah_type')
             ->where('id', '=', $id)
-            ->select('label', 'id', 'typerumah', 'keterangan', 'spesifikasi', 'gambar1', 'gambar2', 'gambar3', 'luas', 'cicilan5', 'cicilan10', 'cicilan15', 'cicilan20')
+            ->select('label', 'id', 'typerumah', 'keterangan', 'spesifikasi', 'gambar1', 'gambar2', 'gambar3', 'luas', 'cicilan5', 'cicilan10', 'cicilan15', 'cicilan20', 'harga_dp')
             ->first();
 
         return view('admin.typerumah.edit', ['rumah' => $rumah_type]);
@@ -102,6 +103,7 @@ class rumah_type extends Controller
         $data->cicilan10 = $request->get('cicilan10');
         $data->cicilan15 = $request->get('cicilan15');
         $data->cicilan20 = $request->get('cicilan20');
+        $data->harga_dp = $request->get('harga_dp');
         $data->save();
         return redirect('/typerumah');
     }

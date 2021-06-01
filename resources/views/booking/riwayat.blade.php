@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 @section('content')
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Riwayat Booking</h1>
+    <h1 class="h3 mb-0 text-gray-800">{{$title}}</h1>
 </div>
 <hr>
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -15,6 +15,7 @@
                         <th>Alamat</th>
                         <th>DP</th>
                         <th>Cicilan</th>
+                        <th>Bukti Transfer</th>
                         <th>Status</th>
                     </tr>
                 </thead>
@@ -28,21 +29,43 @@
                         selama {{$r->jumlah_cicilan}} tahun
                     </td>
                     <td>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                            Lihat
+                        </button>
+                    </td>
+                    <td>
+                        @role('user')
                         <?php
                         if ($r->status_booking == 0) {
-                            echo '<button type="button" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#exampleModalScrollable" onclick=getID(' . $r->id . ')>
-                            <i class="fas fa-plus fa-sm text-white-50"></i> Upload Bukti Trasfer
-                        </button>';
-                        } elseif ($r->status_booking === 1) {
+                            if ($r->bukti == null) {
+                                echo '<button type="button" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#exampleModalScrollable" onclick=getID(' . $r->id . ')>
+                                <i class="fas fa-plus fa-sm text-white-50"></i> Upload Bukti Trasfer
+                            </button>';
+                            } else {
+                                echo 'Butki Trasfer telah di unggah<br>';
+                            }
+                            echo '<a href="bookingProses/' . $r->id . '/2"> <button class="btn btn-warning btn-sm">Batalkan Pemesanan</button></a>';
+                        } elseif ($r->status_booking == 2) {
                             echo "<button class='btn btn-danger'>Pesanan Gagal</button>";
-                        } elseif ($r->status_booking === 2) {
+                        } elseif ($r->status_booking == 1) {
                             echo "<button class='btn btn-success'>Pesanan Sukses</button>";
                         }
+
                         ?>
+                        @endrole
+
+
+                        @role('marketing')
+                        <a href="bookingProses/{{$r->id}}/2"> <button class="btn btn-danger btn-sm">Tolak</button></a>
+                        <a href="bookingProses/{{$r->id}}/3"> <button class="btn btn-success btn-sm">Terima</button></a>
+                        @endrole
+
+                        @role('admin')
+                        <a href="bookingProses/{{$r->id}}/2" hidden> <button class="btn btn-danger btn-sm">Tolak</button></a>
+                        <a href="bookingProses/{{$r->id}}/1"> <button class="btn btn-success btn-sm">Terima</button></a>
+                        @endrole
                     </td>
                 </tr>
-
-
                 @endforeach
 
             </table>
@@ -77,6 +100,28 @@
                 </div>
         </div>
         </form>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
     </div>
 </div>
 

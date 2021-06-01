@@ -20,7 +20,12 @@
                         <th>Alamat</th>
                         <th>Email</th>
                         <th>No Hp</th>
+                        <th>NPWP</th>
                         @role('admin')
+                        <th>Hak Akses</th>
+                        <th>Aksi</th>
+                        @endrole
+                        @role('marketing')
                         <th>Hak Akses</th>
                         <th>Aksi</th>
                         @endrole
@@ -34,9 +39,22 @@
                         <td>{{ $u->alamat}}</td>
                         <td>{{ $u->email}}</td>
                         <td>{{ $u->no_hp}}</td>
+                        <td>{{ $u->npwp}}</td>
                         @role('admin')
                         <td>{{ $u->hakAkses}}</td>
                         <td><a href="user/ubahAkses/{{ $u->id}}"><button class="btn btn-warning btn-sm">Ubah Akses</button></a></td>
+                        @endrole
+                        @role('marketing')
+                        <td>{{ $u->hakAkses}}</td>
+                        <td>
+                            <?php if ($u->hakAkses == 'user') {
+                                if ($u->verified == 0) {
+                                    echo "<button class='btn btn-warning' onclick='myFunction(" . $u->id . ")'>Data Sudah Valid ?</button>";
+                                } else {
+                                    echo "<button class='btn btn-success'>Data Valid</button>";
+                                }
+                            } ?>
+                        </td>
                         @endrole
                     </tr>
                     @endforeach
@@ -75,4 +93,18 @@
         </form>
     </div>
 </div>
+
+<script>
+    function myFunction(id) {
+        var txt;
+        if (confirm("Apakah anda yakin?")) {
+            txt = "1";
+        } else {
+            txt = "0";
+        }
+        //document.getElementById("demo").innerHTML = txt;
+        window.location.href = "verifikasi/" + id + "/" + txt;
+
+    }
+</script>
 @endsection

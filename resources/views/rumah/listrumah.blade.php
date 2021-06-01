@@ -16,12 +16,12 @@
                     <td>{{$r->alamat}}</td>
                     <td>
                         <?php
-                        if ($r->status === null) {
-                            echo "<a href='../booking/" . $r->id . "'><button class='btn btn-success '>Pesan Sekarang</button></a>";
-                        } elseif ($r->status === 0) {
+                        if ($r->status === 1) {
                             echo "Sudah ada yang memesan, tapi belum dibayar<br>";
                             echo "<a href='../booking/" . $r->id . "'><button class='btn btn-success '>Pesan Sekarang</button></a>";
-                        } elseif ($r->status === 1) {
+                        } elseif ($r->status === 0) {
+                            echo "<a href='../booking/" . $r->id . "'><button class='btn btn-success '>Pesan Sekarang</button></a>";
+                        } elseif ($r->status === 2) {
                             echo "<button class='btn btn-danger'>Sudah di booking</button>";
                         }
                         ?>

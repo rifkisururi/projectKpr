@@ -24,6 +24,8 @@ class UserSeeder extends Seeder
             'no_ktp' => '3309330933093309',
             'alamat' => 'Test alamat bos q',
             'no_hp' => '6285647451640',
+            'npwp' => '12344321',
+            'verified' => 1
         ]);
 
         $admin->assignRole('admin');

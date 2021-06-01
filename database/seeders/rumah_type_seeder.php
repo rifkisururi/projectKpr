@@ -27,6 +27,7 @@ class rumah_type_seeder extends Seeder
             'cicilan10' => 10,
             'cicilan15' => 15,
             'cicilan20' => 20,
+            'harga_dp' => 12
         ]);
 
         rumah_type_model::create([
@@ -42,6 +43,7 @@ class rumah_type_seeder extends Seeder
             'cicilan10' => 10,
             'cicilan15' => 15,
             'cicilan20' => 20,
+            'harga_dp' => 12
         ]);
     }
 }

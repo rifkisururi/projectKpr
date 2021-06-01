@@ -56,6 +56,7 @@ class RegisterController extends Controller
             'no_ktp' => ['required', 'string', 'min:16', 'max:16'],
             'alamat' => ['required', 'string'],
             'no_hp' => ['required', 'string'],
+            'npwp' => ['required', 'string'],
         ]);
     }
 
@@ -67,7 +68,9 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'no_ktp' => $data['no_ktp'],
             'alamat' => $data['alamat'],
-            'no_hp' =>  $data['no_hp']
+            'no_hp' =>  $data['no_hp'],
+            'npwp' =>  $data['npwp'],
+            'verified' => 0
         ]);
 
         $user->assignRole('user');

@@ -27,6 +27,7 @@ class RumahType extends Migration
             $table->integer('cicilan10');
             $table->integer('cicilan15');
             $table->integer('cicilan20');
+            $table->integer('harga_dp');
             $table->timestamps();
         });
     }

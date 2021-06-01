@@ -23,7 +23,9 @@ class User extends Authenticatable
         'password',
         'no_ktp',
         'alamat',
-        'no_hp'
+        'no_hp',
+        'npwp',
+        'verified'
     ];
 
     /**

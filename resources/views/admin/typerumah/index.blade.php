@@ -27,6 +27,7 @@
                         <th>Cicilan 10 th</th>
                         <th>Cicilan 15 th</th>
                         <th>Cicilan 20 th</th>
+                        <th>Harga DP</th>
                         <th>Status</th>
                     </tr>
                 </thead>
@@ -45,6 +46,7 @@
                         <td>{{ $r->cicilan10}}</td>
                         <td>{{ $r->cicilan15}}</td>
                         <td>{{ $r->cicilan20}}</td>
+                        <td>{{ $r->harga_dp}}</td>
 
                         <td>
                             <a href="typerumah/edit/{{$r->id}}"> <button class="btn btn-sm btn-warning">Edit</button></a>
@@ -118,6 +120,10 @@
                     <div class="form-group">
                         <label for="">Cicilan 20</label>
                         <input type="text" name="cicilan20" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Harga DP</label>
+                        <input type="number" name="harga_dp" class="form-control">
                     </div>
 
                 </div>

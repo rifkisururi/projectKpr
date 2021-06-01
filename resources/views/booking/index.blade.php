@@ -23,6 +23,10 @@
             <option value="5">5 Tahun ( {{$rumah->cicilan5}}/bln )</option>
         </select>
     </div>
+    <div class="form-group">
+        <label for="">Harga DP</label>
+        <input type="text" class="form-control" value="{{$rumah->harga_dp}}" disabled>
+    </div>
     <button type="submit" class="btn btn-primary">Pesan Sekarang</button>
 </form>
 

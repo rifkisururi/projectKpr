@@ -19,7 +19,9 @@ class CreateUsersTable extends Migration
             $table->string('no_ktp');
             $table->string('alamat');
             $table->string('no_hp');
+            $table->string('npwp');
             $table->string('email')->unique();
+            $table->integer('verified');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

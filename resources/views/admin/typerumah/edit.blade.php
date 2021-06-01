@@ -105,6 +105,14 @@
                 <input type="text" value="{{$rumah->cicilan20}}" name="cicilan20" class="form-control">
             </td>
         </tr>
+        <tr>
+            <td>
+                Harga DP
+            </td>
+            <td>
+                <input type="text" value="{{$rumah->harga_dp}}" name="harga_dp" class="form-control">
+            </td>
+        </tr>
 
         <tr>
             <td>

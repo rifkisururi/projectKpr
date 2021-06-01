@@ -112,4 +112,15 @@ class userController extends Controller
     {
         //
     }
+
+    public function verifikasi($id, $status)
+    {
+
+        $data = User::findOrFail($id);
+        //$update_barang->kd_brg = $request->get('addkdbrg');
+        $data->verified = $status;
+        $data->save();
+
+        return redirect('/user');
+    }
 }

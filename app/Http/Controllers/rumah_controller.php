@@ -11,10 +11,7 @@ class rumah_controller extends Controller
 
     public function index()
     {
-        $rumah = DB::table('rumah_detail')
-            ->join('rumah_type', 'rumah_detail.id_rumah_type', '=', 'rumah_type.id')
-            ->leftJoin('booking', 'booking.id_rumah_detail', '=', 'rumah_detail.id')
-            ->select('rumah_detail.alamat', 'rumah_detail.id', 'rumah_type.label', 'booking.status')
+        $rumah = DB::table('vw_statusRumah')
             ->get();
 
         $rumahType = DB::table('rumah_type')->get();
@@ -124,11 +121,7 @@ class rumah_controller extends Controller
 
     public function listrumah($id)
     {
-        $rumah = DB::table('rumah_detail')
-            ->join('rumah_type', 'rumah_detail.id_rumah_type', '=', 'rumah_type.id')
-            ->leftJoin('booking', 'booking.id_rumah_detail', '=', 'rumah_detail.id')
-            ->where('rumah_detail.id_rumah_type', '=', $id)
-            ->select('rumah_detail.alamat', 'rumah_detail.id', 'booking.status')
+        $rumah = DB::table('vw_statusRumah')
             ->get();
 
         return view('rumah.listrumah', ['rumah' => $rumah]);

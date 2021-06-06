@@ -49,7 +49,7 @@
                     <span>Beranda</span></a>
             </li>
 
-
+            @role('marketing')
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages1" aria-expanded="true" aria-controls="collapsePages1">
                     <i class="fas fa-fw fa-folder-open"></i>
@@ -64,17 +64,64 @@
                 </div>
             </li>
 
+            @endrole
+
+            @role('admin')
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages1" aria-expanded="true" aria-controls="collapsePages1">
+                    <i class="fas fa-fw fa-folder-open"></i>
+                    <span>Data Master</span>
+                </a>
+                <div id="collapsePages1" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('user_index') }}"> Data Pengguna</a>
+                        <a class="collapse-item fas fa-arrow-circle-right" href="{{ route('akunkas') }}"> Data Akun KAS</a>
+                    </div>
+                </div>
+            </li>
+
+            @endrole
+
+            @role('user')
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('rumah') }}">
                     <i class="fas fa-fw fa-home"></i>
                     <span>List Rumah</span></a>
             </li>
+            @endrole
 
+
+            @role('marketing')
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('listBooking') }}">
+                    <i class="fas fa-fw fa-home"></i>
+                    <span>List Booking</span></a>
+            </li>
+            @endrole
+            @role('admin')
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('listBooking') }}">
+                    <i class="fas fa-fw fa-home"></i>
+                    <span>List Booking</span></a>
+            </li>
+            @endrole
+            @role('user')
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('riwayat') }}">
                     <i class="fas fa-fw fa-home"></i>
                     <span>Riwayat Pemesanan</span></a>
             </li>
+            @endrole
+
+            @role('admin')
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('rekapitulasi') }}">
+                    <i class="fas fa-fw fa-home"></i>
+                    <span>Rekapitulasi Kas</span></a>
+            </li>
+            @endrole
+
+
 
 
             <!-- Divider -->

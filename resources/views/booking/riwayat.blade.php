@@ -29,9 +29,16 @@
                         selama {{$r->jumlah_cicilan}} tahun
                     </td>
                     <td>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        @php
+                        if ($r->bukti != null) {
+                        @endphp
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" onclick="getNotta('{{$r->bukti}}')">
                             Lihat
                         </button>
+                        @php
+                        }
+                        @endphp
+
                     </td>
                     <td>
                         @role('user')
@@ -41,8 +48,6 @@
                                 echo '<button type="button" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#exampleModalScrollable" onclick=getID(' . $r->id . ')>
                                 <i class="fas fa-plus fa-sm text-white-50"></i> Upload Bukti Trasfer
                             </button>';
-                            } else {
-                                echo 'Butki Trasfer telah di unggah<br>';
                             }
                             echo '<a href="bookingProses/' . $r->id . '/2"> <button class="btn btn-warning btn-sm">Batalkan Pemesanan</button></a>';
                         } elseif ($r->status_booking == 2) {
@@ -106,20 +111,10 @@
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
             <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <img src="" id="img" width="100%">
             </div>
         </div>
     </div>
@@ -129,6 +124,10 @@
     function getID(id) {
         console.log(id);
         document.getElementById('id').value = id;
+    }
+
+    function getNotta(urlFile) {
+        document.getElementById('img').src = "bukti/" + urlFile;
     }
 </script>
 

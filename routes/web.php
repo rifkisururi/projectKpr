@@ -50,8 +50,16 @@ Route::POST('/booking/{id}', [App\Http\Controllers\booking_controller::class, 's
 Route::get('/riwayat', [App\Http\Controllers\booking_controller::class, 'history'])->name('riwayat');
 Route::POST('/riwayat', [App\Http\Controllers\booking_controller::class, 'saveBukti']);
 
-Route::get('/bookingProses/{id}/{status}', [App\Http\Controllers\booking_controller::class, 'proses'])->middleware('role:user|marketing');
+Route::get('/listBooking', [App\Http\Controllers\booking_controller::class, 'listBooking'])->name('listBooking');
 
+
+Route::get('/bookingProses/{id}/{status}', [App\Http\Controllers\booking_controller::class, 'proses']);
+
+Route::get('/akunkas', [App\Http\Controllers\akunkas_controller::class, 'index'])->name('akunkas');
+Route::POST('/akunkas', [App\Http\Controllers\akunkas_controller::class, 'store']);
+
+
+Route::get('/rekapitulasi', [App\Http\Controllers\akunkas_controller::class, 'rekapitulasi'])->name('rekapitulasi');
 
 // konfirmasi
 // report

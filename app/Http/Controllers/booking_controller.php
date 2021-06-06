@@ -71,6 +71,20 @@ class booking_controller extends Controller
 
     function history()
     {
+
+        $idUser = Auth::user()->id;
+        $booking = DB::table('vw_bookingStatus')
+            ->where('vw_bookingStatus.id_user', '=', $idUser)
+            ->get();
+        $title = "Riwayat Booking";
+
+
+        return view('booking.riwayat', ['booking' => $booking, 'title' => $title]);
+    }
+
+
+    function listBooking()
+    {
         if (Auth::user()->hasRole('admin')) {
             $booking = DB::table('vw_bookingStatus')
                 ->where('vw_bookingStatus.status_booking', '=', 3)
@@ -79,15 +93,8 @@ class booking_controller extends Controller
             $booking = DB::table('vw_bookingStatus')
                 ->where('vw_bookingStatus.status_booking', '=', 0)
                 ->get();
-        } else {
-            $idUser = Auth::user()->id;
-            $booking = DB::table('vw_bookingStatus')
-                ->where('vw_bookingStatus.id_user', '=', $idUser)
-                ->get();
         }
-
-        $title = "Riwayat Booking";
-
+        $title = "Daftar Booking ";
 
         return view('booking.riwayat', ['booking' => $booking, 'title' => $title]);
     }

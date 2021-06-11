@@ -25,7 +25,8 @@ class VwRumahStatus extends Migration
                 when ( select COUNT(*) from booking b where b.id_rumah_detail= rd.id and status = 0) > 0 then 1
                 else 0
             end as status,
-            rt.label 
+            rt.label,
+            rd.id_rumah_type
         from rumah_detail rd
         inner join rumah_type rt on rd.id_rumah_type = rt.id 
         ");

@@ -66,7 +66,7 @@
                         @endrole
 
                         @role('admin')
-                        <a href="bookingProses/{{$r->id}}/2" hidden> <button class="btn btn-danger btn-sm">Tolak</button></a>
+                        <!-- <a href="bookingProses/{{$r->id}}/2" hidden> <button class="btn btn-danger btn-sm">Tolak</button></a> -->
                         <a href="bookingProses/{{$r->id}}/1"> <button class="btn btn-success btn-sm">Terima</button></a>
                         @endrole
                     </td>

@@ -122,7 +122,7 @@ class rumah_controller extends Controller
     public function listrumah($id)
     {
         $rumah = DB::table('vw_statusRumah')
-            ->where('id', '=', $id)
+            ->where('id_rumah_type', '=', $id)
             ->get();
 
         return view('rumah.listrumah', ['rumah' => $rumah]);

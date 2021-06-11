@@ -23,6 +23,7 @@ class booking_controller extends Controller
     public function savebooking(Request $request, $id)
     {
         $idUser = Auth::user()->id;
+        $email = Auth::user()->email;
         $jumlah_cicilan = $request->get('cicilan');
 
         if ($jumlah_cicilan == 5) {
@@ -66,6 +67,11 @@ class booking_controller extends Controller
         $data->id_admin = 0;
         $data->bukti = "";
         $data->save();
+
+
+        $url = "http: //127.0.0.1:8000/kirim-email?dest=$email&title=Informasi pembayaran&body=Selamat pemesanan anda kami terima, mohon bantuannya untuk segera melakukan pembayaran DP";
+        $this->curl($url);
+
         return redirect('/riwayat');
     }
 
@@ -86,10 +92,12 @@ class booking_controller extends Controller
     function listBooking()
     {
         if (Auth::user()->hasRole('admin')) {
+
             $booking = DB::table('vw_bookingStatus')
                 ->where('vw_bookingStatus.status_booking', '=', 3)
                 ->get();
         } elseif (Auth::user()->hasRole('marketing')) {
+
             $booking = DB::table('vw_bookingStatus')
                 ->where('vw_bookingStatus.status_booking', '=', 0)
                 ->get();
@@ -104,6 +112,30 @@ class booking_controller extends Controller
         $data = bookingModel::findOrFail($id);
         $data->status = $status;
         $data->save();
+
+        if ($status == 1) {
+            // kirim data ke dalam kas
+            $harga_dp = DB::table('booking')
+                ->where('id', '=', $id)
+                ->value('harga_dp');
+            //dd($harga_dp);
+            $data = DB::select("
+                insert into kas (id_akun, jumlah, keterangan, created_at, updated_at) values (1,$harga_dp, 'dp', now(),now());
+            ");
+
+            $id_user =
+                DB::table('booking')
+                ->where('id', '=', $id)
+                ->value('id_user');
+
+            $email =
+                DB::table('users')
+                ->where('id', '=', $id_user)
+                ->value('email');
+
+            $url = "http: //127.0.0.1:8000/kirim-email?dest=$email&title=Pembayaran Diterima&body=Selamat pemesanan anda berhasil";
+            $this->curl($url);
+        }
         return redirect('/riwayat');
     }
 
@@ -142,5 +174,22 @@ class booking_controller extends Controller
         $data->bukti = $bukti;
         $data->save();
         return redirect('/riwayat');
+    }
+
+    private function curl($website)
+    {
+        $ch = curl_init();
+
+        // set url 
+        curl_setopt($ch, CURLOPT_URL, $website);
+
+        // return the transfer as a string 
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+        // $output contains the output string 
+        $output = curl_exec($ch);
+
+        // tutup curl 
+        curl_close($ch);
     }
 }

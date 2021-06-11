@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 @section('content')
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Master Data Rumah</h1>
+    <h1 class="h3 mb-0 text-gray-800">Rekapitulasi Kas</h1>
 </div>
 <hr>
 <div class="card-header py-3" align="right">
@@ -17,23 +17,35 @@
                     <tr>
                         <th>Kode Kas</th>
                         <th>Nama Kas</th>
-                        <th>Jumlah</th>
+                        <th>Masuk</th>
+                        <th>Keluar</th>
                         <th>Note</th>
+                        <th>Aksi </th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($data as $d)
+                    @foreach($data as $r)
                     <tr>
                         <td>{{ $r->kode}}</td>
                         <td>{{ $r->namaKas}}</td>
-                        <td>{{ $r->jumlah}}</td>
+                        <td>
+                            @php
+                            if($r->type == 1){
+                            echo $r->jumlah;
+                            }
+                            @endphp
+                        </td>
+                        <td>
+                            @php
+                            if($r->type == 0){
+                            echo $r->jumlah;
+                            }
+                            @endphp
+                        </td>
                         <td>{{ $r->keterangan}}</td>
 
                         <td>
-
-                            <a href="rumahAdmin/edit/{{$r->id}}"> <button class="btn btn-warning btn-sm">Edit</button></a>
-                            <a href="rumahAdmin/hapus/{{$r->id}}"> <button class="btn btn-danger btn-sm">Hapus</button></a>
-
+                            <a href="kasHapus/{{$r->id}}"> <button class="btn btn-danger btn-sm">Hapus</button></a>
                         </td>
                     </tr>
                     @endforeach

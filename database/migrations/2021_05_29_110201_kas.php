@@ -17,7 +17,7 @@ class Kas extends Migration
             $table->id();
             $table->integer('id_akun');
             $table->integer('jumlah');
-            $table->integer('keterangan');
+            $table->string('keterangan');
             $table->timestamps();
         });
     }

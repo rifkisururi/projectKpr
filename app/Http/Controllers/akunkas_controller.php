@@ -31,7 +31,7 @@ class akunkas_controller extends Controller
     {
         $data = DB::table('kas')
             ->join('akun_kas', 'akun_kas.id', '=', 'kas.id_akun')
-            ->select('akun_kas.nama as namaKas', 'akun_kas.kode', 'akun_kas.type', 'kas.jumlah', 'kas.keterangan')
+            ->select('akun_kas.id', 'akun_kas.nama as namaKas', 'akun_kas.kode', 'akun_kas.type', 'kas.jumlah', 'kas.keterangan')
             ->get();
 
         $akun_kas = DB::table('akun_kas')->get();
@@ -47,5 +47,14 @@ class akunkas_controller extends Controller
         $add->keterangan    = $request->keterangan;
         $add->save();
         return redirect('/akunkas');
+    }
+
+    public function destroy($id)
+    {
+        DB::table('kas')
+            ->where('id', '=', $id)
+            ->delete();
+
+        return redirect('/rekapitulasi');
     }
 }

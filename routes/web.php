@@ -60,6 +60,11 @@ Route::POST('/akunkas', [App\Http\Controllers\akunkas_controller::class, 'store'
 
 
 Route::get('/rekapitulasi', [App\Http\Controllers\akunkas_controller::class, 'rekapitulasi'])->name('rekapitulasi');
+Route::get('/kasHapus/{id}', [App\Http\Controllers\akunkas_controller::class, 'destroy']);
+
+Route::get('/kirim-email', [App\Http\Controllers\MailController::class, 'index']);
+
+
 
 // konfirmasi
 // report
